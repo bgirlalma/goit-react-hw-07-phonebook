@@ -1,18 +1,15 @@
 import axios from "axios";
 // import Notiflix from 'notiflix';
-import { fetchingInProgress, fetchingSuccess, fetchingError } from "./contactsSlice"; 
+// import { fetchingInProgress, fetchingSuccess, fetchingError } from "./contactsSlice"; 
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = 'https://6509624af6553137159b52ae.mockapi.io/:endpoint';
+axios.defaults.baseURL = 'https://6509624af6553137159b52ae.mockapi.io';
 
-export const fetchContacts = () => async dispatch => {
+export const fetchContacts = createAsyncThunk('contacts/fetchAll', async (_, thunkAPI) => {
     try{
-        // Индикатор загрузки
-        dispatch(fetchingInProgress());
-        // HTTP-запрос
         const res =await axios.get("/contscts");
-        // Обработка данных
-        dispatch(fetchingSuccess(res.data));
+    return res.data;
     }catch(e){
-        dispatch(fetchingError(e.message))
+        return thunkAPI.rejectWithValue(e.message)
     }
-}
+})

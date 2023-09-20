@@ -1,3 +1,5 @@
+ import { fetchContacts } from "./api";
+ 
  const contactsSlice = {
     name: "contacts",
     initialState: {
@@ -5,23 +7,23 @@
       isLoading: false,
       error: null,
     },
-    reducers: {
-      // Выполнится в момент старта HTTP-запроса
-      fetchingInProgress(state) {
-        state.isLoading = true
-      },
-      // Выполнится если HTTP-запрос завершился успешно
-      fetchingSuccess(state, action) {
+// Добавляем обработку внешних экшенов
+    extraReduсers: (builder) => {
+      builder
+      .addCase(fetchContacts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.error = null;
-        state.items = action.payload;
-      },
-      // Выполнится если HTTP-запрос завершился с ошибкой
-      fetchingError(state, action) {
+            state.error = null;
+            state.items = action.payload;
+      })
+      .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
-        state.error = action.payload;
-      },
-    },
+            state.error = action.payload;
+      })
+    }
   };
 
-  export const {fetchingInProgress, fetchingSuccess, fetchingError} = contactsSlice.action;
+  export const contactsReducer = contactsSlice.reducer;
+

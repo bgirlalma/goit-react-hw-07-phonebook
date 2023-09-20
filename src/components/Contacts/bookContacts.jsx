@@ -14,9 +14,8 @@ useEffect(() => {
 return(
     <div>
         <ul>
-        {contacts.length > 0 && (contact => (
+        {contacts && contacts.map((contact) => (
     <li key={contact.id}>
-        <img src={contact.avatar} alt={contact.id}/>
         <p>{contact.name}: {contact.number}</p>
     </li>
     ))}
