@@ -1,14 +1,21 @@
- import { fetchContacts } from "./api";
+import { createSlice } from '@reduxjs/toolkit';
+ import { fetchContacts } from "./contactsOperation";
+
+ const initialState = {
+  contacts: {
+    items: [],
+    isLoading: false,
+    error: null,
+  },
+  filter: '',
+};
  
- const contactsSlice = {
-    name: "contacts",
-    initialState: {
-      items: [],
-      isLoading: false,
-      error: null,
-    },
+const contactsSlice = createSlice({
+  name: 'contact',
+  initialState: initialState,
+  reducers: {},
 // Добавляем обработку внешних экшенов
-    extraReduсers: (builder) => {
+    extraReduсers: builder => {
       builder
       .addCase(fetchContacts.pending, (state) => {
         state.isLoading = true;
@@ -23,7 +30,7 @@
             state.error = action.payload;
       })
     }
-  };
+  });
 
   export const contactsReducer = contactsSlice.reducer;
 

@@ -1,15 +1,19 @@
-import axios from "axios";
-// import Notiflix from 'notiflix';
-// import { fetchingInProgress, fetchingSuccess, fetchingError } from "./contactsSlice"; 
-import { createAsyncThunk } from "@reduxjs/toolkit";
+// import axios from "axios";
+// axios.defaults.baseURL = 'https://6509624af6553137159b52ae.mockapi.io';
 
-axios.defaults.baseURL = 'https://6509624af6553137159b52ae.mockapi.io';
+// export async function fetchBookContacts() {
+//     console.log(fetchBookContacts)
+//     const {data} = await axios.get('/contacts');
+//     return data;
+// };
 
-export const fetchContacts = createAsyncThunk('contacts/fetchAll', async (_, thunkAPI) => {
-    try{
-        const res =await axios.get("/contscts");
-    return res.data;
-    }catch(e){
-        return thunkAPI.rejectWithValue(e.message)
-    }
-})
+
+// export async function addContactById(contactData) {
+//     const {data} = await axios.post('/contacts', contactData);
+//     return data;
+// }
+
+// export async function deleteContactById(contactId) {
+//     const {data} = await axios.delete(`/contacts/${contactId}`);
+//     return data;
+// }
