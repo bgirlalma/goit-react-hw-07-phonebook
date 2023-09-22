@@ -11,26 +11,25 @@ import { createSlice } from '@reduxjs/toolkit';
 };
  
 const contactsSlice = createSlice({
-  name: 'contact',
+  name: 'contacts',
   initialState: initialState,
   reducers: {},
-// Добавляем обработку внешних экшенов
-    extraReduсers: builder => {
-      builder
+  extraReducers: builder => {
+    builder
       .addCase(fetchContacts.pending, (state) => {
-        state.isLoading = true;
+        state.contacts.isLoading = true;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.isLoading = false;
-            state.error = null;
-            state.items = action.payload;
+        state.contacts.isLoading = false;
+        state.contacts.error = null;
+        state.contacts.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
-        state.isLoading = false;
-            state.error = action.payload;
+        state.contacts.isLoading = false;
+        state.contacts.error = action.payload;
       })
-    }
-  });
+  }
+});
 
   export const contactsReducer = contactsSlice.reducer;
 

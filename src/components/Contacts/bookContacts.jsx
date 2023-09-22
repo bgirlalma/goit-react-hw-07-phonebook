@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { fetchContacts } from "redux/contactsOperation";
 import { getContacts, getError, getIsLoading } from "redux/selectors";
+import { ProgressBar } from  'react-loader-spinner'
+import { ContactsContainer, IsLoading,ItemStyled, ListStyled, StyledName } from "./bookContacts.styled";
 
 export const BookContacts = () => {
 const dispatch = useDispatch();
@@ -14,16 +16,25 @@ useEffect(() => {
 }, [dispatch]);
 
 return(
-    <div>
-        {isLoading && !error && <p>Loading...</p>}
-        <ul>
+    <ContactsContainer>
+        {isLoading && !error && <IsLoading>
+<ProgressBar
+  height="120"
+  width="140"
+  ariaLabel="progress-bar-loading"
+  wrapperStyle={{}}
+  wrapperClass="progress-bar-wrapper"
+  borderColor = '#000000'
+  barColor = '#660000'
+/></IsLoading>}
+        <ItemStyled>
         {contacts && contacts.map((item) => (
-    <li key={item.id}>
-        <p>{item.name}: {item.number}</p>
-    </li>
+    <ListStyled key={item.id}>
+        <StyledName>{item.name}:</StyledName>{item.number}
+    </ListStyled>
     ))}
-        </ul>
+        </ItemStyled>
 
-    </div>
+    </ContactsContainer>
 )
 }
