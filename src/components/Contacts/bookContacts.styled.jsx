@@ -13,11 +13,19 @@ justify-content: center;
 margin-top: 100px;
 `;
 
+export const ErrorTitle = styled.h2`
+border: none;
+font-family: Oxygen, sans-serif;
+font-size: 22px;
+color: red;
+`;
+
 export const ItemStyled = styled.ul`
 display: grid;
 grid-template-columns: repeat(3, 1fr);
 column-gap: 20px;
 gap: 10px;
+color: black;
 `;
 
 export const ListStyled = styled.li`
@@ -29,10 +37,19 @@ padding: 10px 0 10px 0;
 
 font-family: Oxygen, sans-serif;
 font-size: 16px;
+color: black;
 `;
 
 export const StyledName = styled.span`
 font-family: Oxygen, sans-serif;
 font-size: 16px;
 margin-right: 10px;
+`;
+
+export const ButtonDelete = styled.button`
+padding: 2px 2px;
+margin-left: 10px;
+border: 2px solid red;
+cursor: pointer;
+
 `;

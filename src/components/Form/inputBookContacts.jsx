@@ -3,7 +3,9 @@ import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 import Notiflix from 'notiflix';
 import {Container, FormStyle, FieldStyle, SubmitStyled, LabelStaled, PhoneTitle} from './inputBookContacts.styled'
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
+import { addContact } from 'redux/contactsOperation';
+import { getContacts } from 'redux/selectors';
 
 const SignupSchema = Yup.object().shape({
     name: Yup.string()
@@ -17,6 +19,7 @@ const SignupSchema = Yup.object().shape({
 
   export const InputBookContacts = ({ title}) => {
     const dispatch = useDispatch();
+    const contacts = useSelector(getContacts);
    
     return (
         <Container>
@@ -30,16 +33,22 @@ const SignupSchema = Yup.object().shape({
         
         validationSchema={SignupSchema}
         onSubmit={(values, actions) => {
-            const newContact = {
-                id: nanoid(),
-                name: values.name,
-                number: values.number,
-              };
+          const existingContact = contacts.find(contact => contact.name.toLowerCase() === values.name.toLowerCase() && contact.number === values.number);
 
-              dispatch({ type: 'ADD_CONTACT', payload: newContact });
-              
-              actions.resetForm();
-              Notiflix.Notify.success('Контакт успешно добавлен в список!');
+          if(existingContact){
+            Notiflix.Notify.info('Такой контакт уже существует в вашем списке!');
+          }else{
+            const newContactData = {
+              id: nanoid(),
+              name: values.name,
+              number: values.number,
+            }
+            dispatch(addContact(newContactData));
+            actions.resetForm()
+                
+                Notiflix.Notify.success('Контакт успешно добавлен в список!');
+          }
+          
             }}
       >
         <FormStyle>
