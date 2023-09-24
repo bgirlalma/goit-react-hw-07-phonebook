@@ -7,6 +7,18 @@ margin-left: auto;
 margin-right: auto;
 `;
 
+export const StyledTitle = styled.h2`
+display:flex;
+justify-content: center;
+font-family: Oxygen;
+font-weight: bold;
+font-size: 24px;
+margin-bottom: 20px;
+color: rgb(142, 13, 138);
+text-decoration: underline;
+border: none;
+`;
+
 export const IsLoading = styled.p`
 display: flex;
 justify-content: center;

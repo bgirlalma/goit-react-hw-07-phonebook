@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {Form, Field} from 'formik'
 
 export const Container = styled.div`
-width: 100%;
+
 `;
 
 export const PhoneTitle = styled.h2`
@@ -12,13 +12,14 @@ font-size: 24px;
 
 color: rgb(142, 13, 138);
 text-decoration: underline;
-margin-bottom: 20px;
+border: none;
+margin-bottom: 10px;
 `;
 
 export const FormStyle = styled(Form)`
 display: flex;
 flex-direction: column;
-max-width: 760px;
+// max-width: 760px;
 `;
 
 export const LabelStaled = styled.label`
